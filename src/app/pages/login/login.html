@@ -13,11 +13,18 @@
     
       Boas-vindas
       <br> 
-      <input> 
-      <br>
-      <input>
-      <br>
-      <button>Entrar</button>
+
+      <form (ngSubmit)="login()">
+
+        <input type ="text" [ngModel]="usuario.senha" name="senha">
+        <br>
+        <input type="password">
+        <br>
+        <button type="submit">Entrar</button>
+
+      </form>
+
+      
     </div>
 
 </body>
