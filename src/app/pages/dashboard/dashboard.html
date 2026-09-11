@@ -1,1 +1,24 @@
-<p>dashboard works!</p>
+<div>
+    <select name="" id="" (change)="veiculoSelecionado($event)">
+        <option value=""hidden selected disabled>Escolha um modelo</option>
+        <option *ngFor="let v of vehicles" [value]="v.id">
+            {{v.vehicle}}
+        </option>
+    </select>
+</div>
+<br>
+<div>
+    <span>Total vendas: </span>
+    <span>{{selecionado?.volumetotal}}||0</span>
+</div>
+<br>
+<div>
+    <span>Conectados: </span>
+    <span>{{selecionado?.connected}} ||0 </span>
+</div>
+<br>
+<div>
+    <span>Selecionados: </span>
+    <span>{{selecionado?.selected}} ||0 </span>
+    <img *ngIf="selecionado" [src]="selecionado.img" [alt]="selecionado.vehicle">
+</div> 

@@ -4,28 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <a href="projetoVespertino/public/img"></a>
 </head>
 <body>
     <div>
-        <img src="" alt="">
+        <img src="public/img/ranger.png" alt="ranger">
     </div>
     <div>
-    
+
+      <img src="public/img/ford.png" alt="logo da ford">
+      <br>
       Boas-vindas
       <br> 
-
       <form (ngSubmit)="login()">
 
         <input type ="text" [ngModel]="usuario.senha" name="senha">
         <br>
         <input type="password">
         <br>
+        Logar automaticamente
         <button type="submit">Entrar</button>
 
       </form>
 
       
     </div>
+    <script src="src/app/pages/login/login.ts"></script>
 
 </body>
 </html>
