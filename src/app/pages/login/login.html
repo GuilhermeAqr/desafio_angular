@@ -4,32 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <a href="projetoVespertino/public/img"></a>
+    
 </head>
 <body>
-    <div>
-        <img src="public/img/ranger.png" alt="ranger">
-    </div>
-    <div>
 
-      <img src="public/img/ford.png" alt="logo da ford">
-      <br>
-      Boas-vindas
-      <br> 
-      <form (ngSubmit)="login()">
+    <div class="login">
 
-        <input type ="text" [ngModel]="usuario.senha" name="senha">
-        <br>
-        <input type="password">
-        <br>
-        Logar automaticamente
-        <button type="submit">Entrar</button>
+  <!-- Esquerda -->
+  <div class="tela-login__painel-imagem">
+    <div class="painel-imagem__sobreposicao"></div>
+    <img src="img/ranger.png" alt="Ford Ranger em destaque"
+      class="painel-imagem__veiculo">
+    <p class="painel-imagem__legenda">Sistema de gestão de frota</p>
+  </div>
 
+  <!-- Painel direito: formulário de autenticação -->
+  <div class="tela-login__painel-formulario">
+    <div class="painel-formulario__conteudo">
+
+      <div class="conteudo__cabecalho">
+        <img
+          src="img/ford.png" alt="Logotipo Ford"
+          class="cabecalho__logo">
+        <h1 class="cabecalho__titulo">Boas-vindas</h1>
+        <p class="cabecalho__subtitulo">Acesse com suas credenciais para continuar</p>
+      </div>
+
+      <form class="formulario-login"
+        [formGroup]="formularioLogin"
+        (ngSubmit)="login()"
+        novalidate>
+
+        <div class="campo-formulario" [class.campo-formulario--invalido]="campoInvalido('usuario')">
+          <span class="campo-formulario__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5Z"/></svg>
+          </span>
+          <input type="text"
+            id="campoUsuario"
+            class="campo-formulario__entrada"
+            placeholder="Insira seu usuário"
+            formControlName="usuario"
+            autocomplete="username">
+        </div>
+        <p class="campo-formulario__erro" *ngIf="campoInvalido('usuario')">Informe o usuário.</p>
+
+        <div class="campo-formulario" [class.campo-formulario--invalido]="campoInvalido('senha')">
+          <span class="campo-formulario__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M6 10V8a6 6 0 1 1 12 0v2h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1Zm2 0h8V8a4 4 0 1 0-8 0Z"/></svg>
+          </span>
+          <input
+            [type]="senhaVisivel ? 'text' : 'password'"
+            id="campoSenha"
+            class="campo-formulario__entrada"
+            placeholder="Insira sua senha"
+            formControlName="senha"
+            autocomplete="current-password">
+          <button type="button" class="campo-formulario__botao-visibilidade"
+            (click)="alternarVisibilidadeSenha()"
+            [attr.aria-label]="senhaVisivel ? 'Ocultar senha' : 'Mostrar senha'">
+            <svg *ngIf="!senhaVisivel" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 5c5 0 9.3 3.1 11 7-1.7 3.9-6 7-11 7S2.7 15.9 1 12c1.7-3.9 6-7 11-7Zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/></svg>
+            <svg *ngIf="senhaVisivel" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="m3.3 2.5 18.2 18.2-1.4 1.4-3-3A12.7 12.7 0 0 1 12 21C7 21 2.7 17.9 1 14a14.2 14.2 0 0 1 4-5.4L1.9 3.9Zm6.2 6.2 5.8 5.8A3 3 0 0 1 9.5 8.7ZM12 5c5 0 9.3 3.1 11 7a13.5 13.5 0 0 1-3 4.1l-1.5-1.5A5 5 0 0 0 12 7c-.4 0-.8 0-1.2.1L9.2 5.5C10.1 5.2 11 5 12 5Z"/></svg>
+          </button>
+        </div>
+        <p class="campo-formulario__erro" *ngIf="campoInvalido('senha')">Informe a senha.</p>
+
+        <div class="formulario-login__opcoes">
+          <label class="interruptor">
+            <input type="checkbox" class="interruptor__entrada"
+              formControlName="loginAutomatico">
+            <span class="interruptor__trilho"><span class="interruptor__botao"></span></span>
+            <span class="interruptor__rotulo">Logar automaticamente</span>
+          </label>
+
+          <button type="button" class="botao-ajuda"
+            (click)="alternarDicaLoginAutomatico()"
+            aria-label="Saiba mais sobre o login automático">?</button>
+        </div>
+
+        <p class="formulario-login__dica" *ngIf="dicaLoginAutomaticoVisivel">
+          Mantém você conectado neste dispositivo até que você saia manualmente.
+        </p>
+
+        <p class="formulario-login__mensagem-erro" *ngIf="mensagemErro" role="alert">
+          {{ mensagemErro }}
+        </p>
+
+        <button type="submit" class="formulario-login__botao-entrar"
+          [disabled]="formularioLogin.invalid || carregando">
+          <span *ngIf="!carregando">Entrar</span>
+          <span *ngIf="carregando" class="formulario-login__carregando">
+            <span class="formulario-login__spinner" aria-hidden="true"></span>
+            Entrando...
+          </span>
+        </button>
       </form>
 
-      
     </div>
-    <script src="src/app/pages/login/login.ts"></script>
+  </div>
+
+</div>
+
+<script src="src/app/pages/login/login.ts"></script>
 
 </body>
 </html>
