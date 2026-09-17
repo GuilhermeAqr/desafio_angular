@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard/dashboard.css">
+</head>
+<body>
+
 <div>
     <select name="" id="" (change)="veiculoSelecionado($event)">
         <option value=""hidden selected disabled>Escolha um modelo</option>
@@ -22,3 +32,5 @@
     <span>{{selecionado?.selected}} ||0 </span>
     <img *ngIf="selecionado" [src]="selecionado.img" [alt]="selecionado.vehicle">
 </div> 
+</body>
+</html>

@@ -1,5 +1,104 @@
-<p>home works!</p>
-<div>
-    
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body> 
+<div class="pagina-inicial">
+
+  <!-- Cabeçalho -->
+  <header class="cabecalho">
+    <button
+      class="cabecalho__botao-menu"
+      (click)="alternarMenu()"
+      [attr.aria-expanded]="menuAberto"
+      aria-label="Abrir menu de navegação">
+      <span class="cabecalho__icone-menu" [class.cabecalho__icone-menu--aberto]="menuAberto">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+
+    <img
+      src="assets/imagens/logo-ford.svg"
+      alt="Logotipo Ford"
+      class="cabecalho__logo">
+
+    <button
+      class="cabecalho__botao-usuario"
+      (click)="alternarMenuUsuario()"
+      aria-label="Menu do usuário">
+      <span class="cabecalho__avatar">{{ inicialUsuario }}</span>
+    </button>
+  </header>
+
+  <div class="pagina-inicial__corpo">
+
+    <!-- Menu lateral -->
+    <nav class="menu-lateral" [class.menu-lateral--aberto]="menuAberto">
+      <ul class="menu-lateral__lista">
+        <li class="menu-lateral__item">
+          <a
+            routerLink="/home"
+            routerLinkActive="menu-lateral__link--ativo"
+            class="menu-lateral__link">
+            <span class="menu-lateral__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 3 2 12h3v8h6v-5h2v5h6v-8h3Z"/></svg>
+            </span>
+            <span class="menu-lateral__texto">Home</span>
+          </a>
+        </li>
+        <li class="menu-lateral__item">
+          <a
+            routerLink="/dashboard"
+            routerLinkActive="menu-lateral__link--ativo"
+            class="menu-lateral__link"
+            (click)="irParaDashboard()">
+            <span class="menu-lateral__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 13h4v7H4Zm6-9h4v16h-4Zm6 5h4v11h-4Z"/></svg>
+            </span>
+            <span class="menu-lateral__texto">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="menu-lateral__botao-sair" (click)="Logout()">
+        <span class="menu-lateral__icone" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 3v10h-2V3ZM6.4 6.4A8 8 0 1 0 17.6 6.4l-1.4 1.4a6 6 0 1 1-8.4 0Z"/></svg>
+        </span>
+        <span class="menu-lateral__texto">Sair</span>
+      </button>
+    </nav>
+
+    <!-- Sobreposição telas pequenas -->
+    <div
+      class="sobreposicao-menu"
+      *ngIf="menuAberto"
+      (click)="alternarMenu()"></div>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo-principal">
+      <div
+        class="conteudo-principal__imagem-fundo"
+        style="background-image: url('assets/imagens/veiculo-destaque.png');"></div>
+      <div class="conteudo-principal__gradiente"></div>
+
+      <div class="cartao-boas-vindas">
+        <p class="cartao-boas-vindas__rotulo">Sistema de dados FORD</p>
+        <h2 class="cartao-boas-vindas__titulo">Seja bem-vindo(a){{ nomeUsuario ? ', ' + nomeUsuario : '' }}!</h2>
+        <a
+          routerLink="/dashboard"
+          class="cartao-boas-vindas__link"
+          (click)="irParaDashboard()">
+          Acessar dashboard
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M13 5l7 7-7 7-1.4-1.4L16.2 13H4v-2h12.2l-4.6-4.6Z"/></svg>
+        </a>
+      </div>
+    </main>
+
+  </div>
 </div>
-<button (click)="logout()">Logout</button>
+</body>
+</html>

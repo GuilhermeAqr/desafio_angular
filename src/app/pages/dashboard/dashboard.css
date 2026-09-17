@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:host {
+  --azul-ford: #0B2C6B;
+  --azul-ford-claro: #2D5FE0;
+  --cinza-fundo: #F1F2F6;
+  --cinza-borda: #DADFE8;
+  --cinza-texto: #6B7284;
+  --texto-escuro: #171B26;
+  --branco: #FFFFFF;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 1.25rem;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--texto-escuro);
+}
+
+br {
+  display: none;
+}
+
+/* Cartão base: todo <div> direto vira um cartão */
+div {
+  background: var(--branco);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 12px;
+  padding: 1rem 1.3rem;
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  box-shadow: 0 1px 2px rgba(23, 27, 38, 0.04);
+}
+
+div:has(select) {
+  min-width: 230px;
+  justify-content: flex-start;
+  padding: 0.4rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+div:has(img) {
+  flex: 1 1 260px;
+  align-items: flex-start;
+}
+
+/* Rótulo (primeiro <span> de cada cartão de indicador) */
+div span:first-of-type {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--cinza-texto);
+}
+
+div span:nth-of-type(2) {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--azul-ford);
+}
+
+
+select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.75rem 2.4rem 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--texto-escuro);
+  background-color: var(--cinza-fundo);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 10px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236B7284'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 18px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--azul-ford-claro);
+  box-shadow: 0 0 0 3px rgba(45, 95, 224, 0.15);
+}
+
+select option[disabled] {
+  color: #A2A8B8;
+}
+
+img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+  align-self: center;
+  margin-top: 0.25rem;
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  div,
+  div:has(select),
+  div:has(img) {
+    min-width: 45%;
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    flex-direction: column;
+    padding: 0.85rem;
+    gap: 0.75rem;
+  }
+
+  div,
+  div:has(select),
+  div:has(img) {
+    min-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  div span:nth-of-type(2) {
+    font-size: 1.25rem;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
