@@ -8,7 +8,11 @@ import { Auth } from '../../services/auth';
   styleUrl: './home.css',
 })
 export class Home {
-  constructor(private auth:Auth){}
+  private auth: Auth;
+
+  constructor(auth: Auth) {
+    this.auth = auth;
+  }
 
   logout():void{
     
